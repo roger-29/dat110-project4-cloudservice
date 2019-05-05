@@ -30,7 +30,10 @@ dependencies {
 
 	// Spark
 	compile "com.sparkjava:spark-core:2.8.0"
+
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 }
 
 // Define the main class for the application
-mainClassName = 'no.hvl.dat110.App'
+mainClassName = 'no.hvl.dat110.ac.rest.App'
