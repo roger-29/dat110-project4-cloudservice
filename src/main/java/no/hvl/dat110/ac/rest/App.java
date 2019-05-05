@@ -10,10 +10,10 @@ import static spark.Spark.delete;
 import com.google.gson.Gson;
 
 public class App {
-	
+
 	static AccessLog accesslog = null;
 	static AccessCode accesscode = null;
-	
+
 	public static void main(String[] args) {
 
 		if (args.length > 0) {
@@ -23,21 +23,21 @@ public class App {
 		}
 
 		// objects for data stored in the service
-		
+
 		accesslog = new AccessLog();
-		accesscode  = new AccessCode();
-		
+		accesscode = new AccessCode();
+
 		after((req, res) -> {
-  		  res.type("application/json");
-  		});
-		
+			res.type("application/json");
+		});
+
 		// for basic testing purposes
 		get("/accessdevice/hello", (req, res) -> {
-		 	Gson gson = new Gson();
-		 	
-		 	return gson.toJson("IoT Access Control Device");
+			Gson gson = new Gson();
+
+			return gson.toJson("IoT Access Control Device");
 		});
-		
+
 		// Get collection of logs
 		get("/accessdevice/log", (req, res) -> {
 			return accesslog.toJson();
@@ -55,7 +55,7 @@ public class App {
 		// Add log entry
 		post("/accessdevice/log", (req, res) -> {
 			Gson gson = new Gson();
-			
+
 			AccessMessage message = gson.fromJson(req.body(), AccessMessage.class);
 
 			int id = accesslog.add(message.getMessage());
@@ -67,7 +67,7 @@ public class App {
 		delete("/accessdevice/log", (req, res) -> {
 			accesslog.clear();
 
-			return accesslog.toJson();			
+			return accesslog.toJson();
 		});
 
 		// Get current accesscode
@@ -87,5 +87,5 @@ public class App {
 
 			return gson.toJson(accesscode);
 		});
-    }
+	}
 }
