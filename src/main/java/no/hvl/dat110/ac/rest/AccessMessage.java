@@ -3,7 +3,7 @@ package no.hvl.dat110.ac.rest;
 public class AccessMessage {
 
 	private String message;
-	
+
 	public AccessMessage(String message) {
 		this.message = message;
 	}
@@ -15,5 +15,4 @@ public class AccessMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }

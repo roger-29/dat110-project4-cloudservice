@@ -9,12 +9,6 @@ import static spark.Spark.delete;
 
 import com.google.gson.Gson;
 
-import sun.jvm.hotspot.debugger.cdbg.AccessControl;
-
-/**
- * Hello world!
- *
- */
 public class App {
 	
 	static AccessLog accesslog = null;
@@ -39,7 +33,6 @@ public class App {
 		
 		// for basic testing purposes
 		get("/accessdevice/hello", (req, res) -> {
-			
 		 	Gson gson = new Gson();
 		 	
 		 	return gson.toJson("IoT Access Control Device");
@@ -47,38 +40,52 @@ public class App {
 		
 		// Get collection of logs
 		get("/accessdevice/log", (req, res) -> {
-
+			return accesslog.toJson();
 		});
 
 		// Get specific log entry
 		get("/accessdevice/log/:id", (req, res) -> {
+			Gson gson = new Gson();
 
+			int id = Integer.parseInt(req.params(":id"));
+
+			return gson.toJson(accesslog.get(id));
 		});
 
 		// Add log entry
 		post("/accessdevice/log", (req, res) -> {
 			Gson gson = new Gson();
-			Gson request = new Gson();
+			
+			AccessMessage message = gson.fromJson(req.body(), AccessMessage.class);
 
-			request.fromJson(req, AccessMessage.class);
+			int id = accesslog.add(message.getMessage());
 
-			return gson.toJson("gg");
+			return gson.toJson(accesslog.get(id));
 		});
 
 		// Delete all log entries and return empty collection
 		delete("/accessdevice/log", (req, res) -> {
+			accesslog.clear();
 
-			
+			return accesslog.toJson();			
 		});
 
 		// Get current accesscode
 		get("/accessdevice/code", (req, res) -> {
+			Gson gson = new Gson();
 
+			return gson.toJson(accesscode);
 		});
 
 		// Update accesscode
 		put("/accessdevice/code", (req, res) -> {
+			Gson gson = new Gson();
 
+			AccessCode code = gson.fromJson(req.body(), AccessCode.class);
+
+			accesscode = code;
+
+			return gson.toJson(accesscode);
 		});
     }
 }
