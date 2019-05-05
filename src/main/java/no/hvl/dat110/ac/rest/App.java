@@ -13,7 +13,7 @@ public class App {
 		if (args.length > 0) {
 			port(Integer.parseInt(args[0]));
 		} else {
-			getHerokuAssignedPort();
+			port(getHerokuAssignedPort());
 		}
 
 		// objects for data stored in the service
