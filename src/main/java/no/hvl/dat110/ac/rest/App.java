@@ -9,6 +9,8 @@ import static spark.Spark.delete;
 
 import com.google.gson.Gson;
 
+import sun.jvm.hotspot.debugger.cdbg.AccessControl;
+
 /**
  * Hello world!
  *
@@ -43,8 +45,40 @@ public class App {
 		 	return gson.toJson("IoT Access Control Device");
 		});
 		
-		// TODO: implement the routes required for the access control service
-		
+		// Get collection of logs
+		get("/accessdevice/log", (req, res) -> {
+
+		});
+
+		// Get specific log entry
+		get("/accessdevice/log/:id", (req, res) -> {
+
+		});
+
+		// Add log entry
+		post("/accessdevice/log", (req, res) -> {
+			Gson gson = new Gson();
+			Gson request = new Gson();
+
+			request.fromJson(req, AccessMessage.class);
+
+			return gson.toJson("gg");
+		});
+
+		// Delete all log entries and return empty collection
+		delete("/accessdevice/log", (req, res) -> {
+
+			
+		});
+
+		// Get current accesscode
+		get("/accessdevice/code", (req, res) -> {
+
+		});
+
+		// Update accesscode
+		put("/accessdevice/code", (req, res) -> {
+
+		});
     }
-    
 }
