@@ -4,7 +4,7 @@ public class AccessEntry {
 
 	private Integer id;
 	private String message;
-	
+
 	public AccessEntry(int id, String message) {
 		this.id = id;
 		this.message = message;
@@ -24,5 +24,5 @@ public class AccessEntry {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}	
+	}
 }
