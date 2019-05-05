@@ -35,5 +35,14 @@ dependencies {
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 }
 
+jar {
+	manifest {
+		attributes(
+			'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+			'Main-Class': 'no.hvl.dat110.ac.rest.App'
+		)
+	}
+}
+
 // Define the main class for the application
 mainClassName = 'no.hvl.dat110.ac.rest.App'
